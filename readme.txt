@@ -21,7 +21,7 @@ instructions:
 * add subreddits, minpage and maxpage can stay 0 if you want to download all
 * your new subreddits should appear in the window
 * to download specific subreddits mark/highlight one or more
-* to download all have no subreddits deselected
+  to download all have no subreddits selected (deselect all)
 * click start
 * watch as images tick in
   (you can double click a subreddit to open the folder)
