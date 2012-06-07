@@ -22,9 +22,7 @@ namespace imgurdl
         private void LoadSettings()
         {
             Settings.Instance = Settings.Load("settings.xml");
-            LoadedSubreddits = new List<Subreddit>();
-            foreach (var sr in Settings.Instance.Subreddits)
-                LoadedSubreddits.Add(new Subreddit(sr));
+            LoadedSubreddits = Settings.Instance.Subreddits.Select(x => new Subreddit(x)).ToList() ?? new List<Subreddit>();
             dgData.DataSource = LoadedSubreddits;
         }
 
@@ -88,6 +86,7 @@ namespace imgurdl
 
         private void Worker()
         {
+            // TODO: Improve this code
             if (dgData.SelectedRows.Count > 0)
             {
                 foreach (DataGridViewRow dgv in dgData.SelectedRows)
@@ -131,6 +130,8 @@ namespace imgurdl
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // TODO: Somehow ensure that every thread no longer exists to prevent the process running in background
+            //       although it should already work by itself by now.
             Stop();
             Settings.Instance.Save();
             fLog = null;
@@ -153,6 +154,7 @@ namespace imgurdl
 
         private void dgData_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            // TODO: Find a better way to locate the row
             var sr = LoadedSubreddits.FirstOrDefault(x => x.Name == dgData.Rows[e.RowIndex].Cells[0].Value as string);
             // Sometimes it doesn't exist
             var dir = Path.Combine(Settings.Instance.StoragePath, sr.Name);

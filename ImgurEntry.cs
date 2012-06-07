@@ -63,6 +63,8 @@ namespace imgurdl
 
         public void Download(string storagepath, WebClient wc)
         {
+            // TODO: Improve this code
+            // Something that ensures it's downloaded and that it never gets stuck
             wc.DownloadFile(URL, Path.Combine(storagepath, FormattedName));
         }
     }

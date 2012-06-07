@@ -93,6 +93,7 @@ namespace imgurdl
 
         public void Download(string storagePath)
         {
+            // TODO: Improve this code
             _worker = new Thread(() =>
             {
                 var wc = new WebClient();
